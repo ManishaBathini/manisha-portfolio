@@ -1,0 +1,164 @@
+/* ================================================
+   Contact Section — Minimal centered reference style
+   Theme: Black + Emerald Green
+================================================ */
+
+.contact-section {
+  position: relative;
+  padding: 120px 24px;
+  background: #000000;
+  overflow: hidden;
+  /* Start visible — animation is additive (slides in from below) */
+  opacity: 1;
+}
+.contact-section:not(.contact--visible) .contact-inner {
+  opacity: 0;
+  transform: translateY(36px);
+}
+.contact-inner {
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+
+.contact-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, #0d1f0d 0%, #060f06 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Centered inner container ── */
+.contact-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.4rem;
+}
+
+/* ── Tag ── */
+.contact-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4ade80;
+  letter-spacing: 0.08em;
+}
+
+/* ── Heading ── */
+.contact-heading {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* ── Body text ── */
+.contact-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  color: #9ca3af;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 520px;
+}
+.contact-body strong {
+  color: #e5e5e5;
+  font-weight: 600;
+}
+
+/* ── Say Hello button ── */
+.contact-btn {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4ade80;
+  background: transparent;
+  border: 1.5px solid #4ade80;
+  border-radius: 8px;
+  padding: 14px 44px;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+}
+.contact-btn:hover {
+  background: #4ade80;
+  color: #052e16;
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px rgba(74, 222, 128, 0.3);
+}
+
+/* ── Availability badge ── */
+.contact-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  color: #6ee7b7;
+  letter-spacing: 0.04em;
+}
+.contact-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+/* ── Social icons row ── */
+.contact-socials {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+}
+
+.contact-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+.contact-social:hover {
+  color: #4ade80;
+  transform: translateY(-3px);
+}
+
+/* ── Credit ── */
+.contact-credit {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin: 0;
+  margin-top: 0.5rem;
+  letter-spacing: 0.03em;
+}
+.contact-credit span {
+  color: #4ade80;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .contact-section { padding: 80px 20px; }
+  .contact-heading { font-size: 2rem; }
+}

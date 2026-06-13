@@ -1,0 +1,359 @@
+/* ================================================
+   SplashCard — Phase-animated intro screen
+   Theme: Black + Emerald Green (adapted from old portfolio)
+================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+/* ── Green tokens (replaces ember/red from old portfolio) ── */
+:root {
+  --g:        #4ade80;
+  --g-light:  #6ee7b7;
+  --g-dim:    rgba(74,222,128,0.22);
+  --bg:       #000000;
+  --bg-2:     #0a0f0a;
+  --text:     #e8f0e8;
+  --text-muted: rgba(200,230,200,0.45);
+  --border:   rgba(74,222,128,0.07);
+  --spring:   cubic-bezier(0.34,1.56,0.64,1);
+  --out:      cubic-bezier(0.22,1,0.36,1);
+}
+
+/* ────────────────────────────────
+   BASE SHELL
+──────────────────────────────── */
+.splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  overflow: hidden;
+  transition: opacity 1s var(--out), transform 1s var(--out);
+}
+
+.splash--out {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+
+/* ────────────────────────────────
+   PARTICLES (green instead of ember)
+──────────────────────────────── */
+.splash__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.splash__particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--g);
+  opacity: 0;
+  animation: ptl linear infinite;
+}
+
+@keyframes ptl {
+  0%   { opacity: 0;    transform: translateY(0)     scale(0); }
+  12%  { opacity: 0.45; transform: translateY(-15px)  scale(1); }
+  88%  { opacity: 0.06; transform: translateY(-100px) scale(0.6); }
+  100% { opacity: 0;    transform: translateY(-140px) scale(0); }
+}
+
+/* ────────────────────────────────
+   BACKGROUND GLOWS (green)
+──────────────────────────────── */
+.splash__glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(100px);
+  animation: glow-breathe 7s ease-in-out infinite;
+}
+
+.splash__glow--tl {
+  width: 500px; height: 500px;
+  background: rgba(74,222,128,0.10);
+  top: -180px; left: -180px;
+}
+
+.splash__glow--br {
+  width: 380px; height: 380px;
+  background: rgba(74,222,128,0.07);
+  bottom: -140px; right: -140px;
+  animation-delay: 3.5s;
+}
+
+@keyframes glow-breathe {
+  0%,100% { transform: scale(1);   opacity: 0.8; }
+  50%     { transform: scale(1.2); opacity: 1; }
+}
+
+/* ────────────────────────────────
+   HEXAGON GRID (already in tsx as SVG)
+──────────────────────────────── */
+.splash-hex-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+}
+
+/* ────────────────────────────────
+   ANIME GIRL — slides up from bottom
+──────────────────────────────── */
+.splash__girl {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(110%);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.splash__girl--show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.splash__girl-img {
+  width: clamp(260px, 32vw, 420px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 -12px 48px rgba(74,222,128,0.22))
+    drop-shadow(0 0 80px rgba(74,222,128,0.10));
+  animation: girl-float 5s ease-in-out infinite 3s;
+}
+
+@keyframes girl-float {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-12px); }
+}
+
+.splash__girl-shadow {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px; height: 20px;
+  background: radial-gradient(ellipse, rgba(74,222,128,0.28) 0%, transparent 70%);
+  filter: blur(10px);
+  animation: shadow-pulse 5s ease-in-out infinite 3s;
+}
+
+@keyframes shadow-pulse {
+  0%,100% { transform: translateX(-50%) scaleX(1);    opacity: 0.7; }
+  50%     { transform: translateX(-50%) scaleX(0.85); opacity: 0.4; }
+}
+
+.splash__girl-aura {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse at bottom, rgba(74,222,128,0.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ────────────────────────────────
+   STAGE — foreground content
+──────────────────────────────── */
+.splash__stage {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding-bottom: clamp(180px, 28vw, 320px);
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* ── TAG (phase: greeting) ── */
+.splash__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--g-light);
+  background: rgba(74,222,128,0.08);
+  border: 1px solid rgba(74,222,128,0.22);
+  padding: 5px 14px;
+  border-radius: 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.6s var(--out), transform 0.6s var(--out);
+}
+.splash__tag--show { opacity: 1; transform: translateY(0); }
+
+.splash__tag-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--g);
+  box-shadow: 0 0 6px var(--g);
+  animation: dot-blink 1.8s ease-in-out infinite;
+}
+@keyframes dot-blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.3; }
+}
+
+/* ── HEADLINE (phase: text) ── */
+.splash__headline {
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.85s var(--out), transform 0.85s var(--out);
+}
+.splash__headline--show { opacity: 1; transform: translateY(0); }
+
+.splash__h1 {
+  font-family: 'Space Grotesk', 'Raleway', sans-serif;
+  font-size: clamp(1.5rem, 3.8vw, 2.9rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .splash__h1 { white-space: normal; font-size: 1.35rem; }
+}
+
+/* Green accent on "Manisha's" */
+.splash__em {
+  font-style: normal;
+  color: var(--g);
+  font-weight: 700;
+}
+
+/* Typing cursor */
+.splash__cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: var(--g);
+  margin-left: 4px;
+  vertical-align: text-bottom;
+  border-radius: 2px;
+  animation: cursor-blink 1s step-end infinite 1.5s;
+}
+@keyframes cursor-blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+
+/* ── SUB (phase: text) ── */
+.splash__sub {
+  font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s var(--out) 0.15s, transform 0.7s var(--out) 0.15s;
+}
+.splash__sub--show { opacity: 1; transform: translateY(0); }
+
+/* ── ACTIONS / CTA (phase: cta) ── */
+.splash__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--out), transform 0.7s var(--out);
+  margin-top: 6px;
+}
+.splash__actions--show { opacity: 1; transform: translateY(0); }
+
+/* Button */
+.splash__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #052e16;
+  background: var(--g);
+  border: none;
+  padding: 13px 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 4px 28px rgba(74,222,128,0.40);
+  transition: transform 0.25s var(--spring), box-shadow 0.25s;
+}
+
+.splash__btn-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #6ee7b7, #22c55e);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.splash__btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 40px rgba(74,222,128,0.55);
+}
+.splash__btn:hover .splash__btn-bg { opacity: 1; }
+.splash__btn:active { transform: scale(0.97); }
+
+.splash__btn-label,
+.splash__btn-arrow { position: relative; z-index: 1; }
+
+.splash__btn-arrow { transition: transform 0.25s var(--spring); }
+.splash__btn:hover .splash__btn-arrow { transform: translateX(4px); }
+
+/* ────────────────────────────────
+   CORNER DECORATIONS
+──────────────────────────────── */
+.splash__corner {
+  position: absolute;
+  width: 28px; height: 28px;
+  border-color: rgba(74,222,128,0.30);
+  border-style: solid;
+  z-index: 6;
+  pointer-events: none;
+}
+.splash__corner--tl { top: 20px; left: 20px;   border-width: 2px 0 0 2px; border-radius: 3px 0 0 0; }
+.splash__corner--tr { top: 20px; right: 20px;  border-width: 2px 2px 0 0; border-radius: 0 3px 0 0; }
+.splash__corner--bl { bottom: 20px; left: 20px;  border-width: 0 0 2px 2px; border-radius: 0 0 0 3px; }
+.splash__corner--br { bottom: 20px; right: 20px; border-width: 0 2px 2px 0; border-radius: 0 0 3px 0; }
+
+/* ────────────────────────────────
+   REDUCED MOTION
+──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .splash__particle, .splash__glow, .splash__girl-img,
+  .splash__girl-shadow, .splash__tag-dot,
+  .splash__cursor, .splash__btn-arrow { animation: none !important; }
+  .splash, .splash__tag, .splash__headline, .splash__sub,
+  .splash__actions, .splash__girl, .splash__bar { transition-duration: 0.01ms !important; }
+}

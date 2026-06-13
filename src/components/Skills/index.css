@@ -1,0 +1,256 @@
+/* ================================================
+   Skills Section
+   Theme: Black + Emerald Green
+================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Raleway:wght@600;700;800&display=swap');
+
+/* ── Section shell ── */
+.skills-section {
+  position: relative;
+  padding: 100px 0;
+  background: #000000;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Radial top-glow */
+.skills-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    #1a3d1a 0%,
+    #0d200d 35%,
+    #000000 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.skills-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ════════════════════════════════════════════════
+   HEADER — always fully visible, no opacity tricks
+════════════════════════════════════════════════ */
+.skills-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.skills-tag {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4ade80;
+  letter-spacing: 0.08em;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 20px;
+  padding: 4px 16px;
+  display: inline-block;
+}
+
+.skills-title {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.skills-subtitle {
+  font-size: 1rem;
+  color: #8a8a8a;
+  margin: 0;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* ════════════════════════════════════════════════
+   FILTER TABS — always visible
+════════════════════════════════════════════════ */
+.skills-tabs-wrap {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.skills-tabs-pill {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  border-radius: 50px;
+  padding: 6px;
+  width: fit-content;
+}
+
+.skills-tab {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 40px;
+  padding: 8px 28px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  outline: none;
+}
+.skills-tab:hover {
+  color: #cccccc;
+  background: #181818;
+}
+.skills-tab--active {
+  background: #1f1f1f;
+  border-color: #333333;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ════════════════════════════════════════════════
+   HEXAGON GRID — always visible, animates on mount
+════════════════════════════════════════════════ */
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 14px 10px;
+  max-width: 940px;
+  padding: 10px 0 30px;
+}
+
+/* Individual hex wrapper */
+.hex-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Entrance animation triggers when wrapper mounts */
+  animation: hexEntrance 0.45s ease both;
+}
+
+@keyframes hexEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Honeycomb offset */
+.skills-grid .hex-wrapper:nth-child(8n+2),
+.skills-grid .hex-wrapper:nth-child(8n+4),
+.skills-grid .hex-wrapper:nth-child(8n+6),
+.skills-grid .hex-wrapper:nth-child(8n+8) {
+  margin-top: 30px;
+}
+
+/* ── Outer hexagon (border simulation) ── */
+.hex-outer {
+  width: 140px;
+  height: 120px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: #2a2a2a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* ── Inner hexagon (fill) ── */
+.hex-inner {
+  width: 124px;
+  height: 144px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: #111111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s ease;
+}
+
+/* Devicon */
+.hex-inner i {
+  font-size: 40px;
+  line-height: 1;
+  transition: transform 0.3s ease;
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+/* Label */
+.hex-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  padding: 0 6px;
+  transition: color 0.3s ease;
+}
+
+/* ── Hover ── */
+.hex-wrapper:hover .hex-outer {
+  background: linear-gradient(135deg, #4ade80, #059669);
+  box-shadow: 0 0 24px rgba(74, 222, 128, 0.35);
+}
+.hex-wrapper:hover .hex-inner {
+  background: #0d1a0d;
+}
+.hex-wrapper:hover .hex-inner i {
+  transform: scale(1.12);
+  opacity: 1;
+}
+.hex-wrapper:hover .hex-label {
+  color: #4ade80;
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .skills-title { font-size: 2rem; }
+  .skills-tabs-pill { flex-wrap: wrap; border-radius: 20px; gap: 6px; }
+  .skills-tab { padding: 7px 18px; font-size: 0.82rem; }
+  .hex-outer { width: 110px; height: 127px; }
+  .hex-inner { width: 104px; height: 121px; }
+  .hex-inner i { font-size: 32px; }
+  .hex-label { font-size: 0.65rem; }
+  .skills-grid { gap: 10px 6px; }
+}
+
+@media (max-width: 480px) {
+  .skills-section { padding: 70px 0; }
+  .skills-title { font-size: 1.7rem; }
+  .hex-outer { width: 94px; height: 108px; }
+  .hex-inner { width: 88px; height: 102px; }
+  .hex-inner i { font-size: 26px; }
+  .hex-label { font-size: 0.58rem; }
+}

@@ -1,0 +1,223 @@
+/* ===================================================
+   Services Section — index.css
+   =================================================== */
+
+:root {
+  --accent-green: #4ade80;
+  --accent-mint: #6ee7b7;
+  --accent-lime: #84cc16;
+  --accent-emerald: #059669;
+  --bg-main: #000000;
+  --bg-card: #0d0d0d;
+  --border-default: #1a1a1a;
+  --text-white: #f9fafb;
+  --text-gray: #9ca3af;
+  --font-heading: 'Raleway', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ── Section wrapper ── */
+.services-section {
+  position: relative;
+  background: var(--bg-main);
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+/* ── Top-center radial glow ── */
+.services-glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(74, 222, 128, 0.12) 0%,
+    rgba(74, 222, 128, 0.04) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header ── */
+.services-header {
+  text-align: center;
+  margin-bottom: 64px;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.services-header--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services-section-tag {
+  display: inline-block;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: var(--accent-green);
+  letter-spacing: 0.06em;
+  margin-bottom: 0.75rem;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  border-radius: 999px;
+  padding: 4px 16px;
+}
+
+.services-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text-white);
+  margin: 0.4rem 0 0.75rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.services-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-gray);
+  max-width: 540px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Cards Grid ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Individual Card ── */
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-default);
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  cursor: default;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    opacity 0.6s ease;
+  opacity: 0;
+  transform: translateY(28px);
+  will-change: opacity, transform;
+}
+
+.service-card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.service-card:hover {
+  border-color: var(--accent-green);
+  background: linear-gradient(135deg, #0d0d0d, #0d1a0d);
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.1),
+              0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ── Card Icon ── */
+.service-card__icon {
+  font-size: 48px;
+  line-height: 1;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.3));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.service-card:hover .service-card__icon {
+  filter: drop-shadow(0 0 14px rgba(74, 222, 128, 0.55));
+  transform: scale(1.06);
+}
+
+/* ── Card Title ── */
+.service-card__title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin: 0;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+/* ── Card Description ── */
+.service-card__desc {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  line-height: 1.7;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Tags row ── */
+.service-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.service-tag {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-green);
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.22);
+  border-radius: 999px;
+  padding: 3px 12px;
+  letter-spacing: 0.02em;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.service-card:hover .service-tag {
+  background: rgba(74, 222, 128, 0.15);
+  color: var(--accent-mint);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-section {
+    padding: 70px 0;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .services-header {
+    margin-bottom: 40px;
+  }
+}

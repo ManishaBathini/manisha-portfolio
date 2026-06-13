@@ -1,0 +1,337 @@
+/* ═══════════════════════════════════════════
+   ABOUT SECTION
+═══════════════════════════════════════════ */
+
+.about-section {
+  position: relative;
+  padding: 70px 0 80px;
+  overflow: hidden;
+}
+
+.about-glow {
+  position: absolute;
+  top: -120px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 200, 150, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.top-about-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    #1a3d1a 0%,
+    #0d200d 35%,
+    #000000 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 44px;
+  align-items: center;
+}
+
+/* ── Scroll reveal ── */
+.about-photo-col,
+.about-content {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.about-photo-col.visible { opacity: 1; transform: translateY(0); }
+.about-content.visible   { opacity: 1; transform: translateY(0); transition-delay: 0.15s; }
+
+/* ───────────────────────────────────────────
+   PHOTO COLUMN
+─────────────────────────────────────────── */
+.about-photo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Wrapper provides the relative stacking context.
+   Extra padding-right/bottom gives room for the offset back card. */
+.about-photo-wrap {
+  position: relative;
+  width: 360px;
+  height: 440px;
+  padding: 0 14px 14px 0;
+  cursor: pointer;
+}
+
+/* ── Back decorative card ── */
+.about-photo-back {
+  position: absolute;
+  /* match the front card's area */
+  top: 0;
+  left: 0;
+  right: 14px;   /* accounts for padding */
+  bottom: 14px;
+  border: 2px solid #0d9488;
+ 
+  z-index: 0;
+  background: transparent;
+  transform: translate(10px, 10px);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+/* ── Front image card ── */
+.about-photo-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 16px;
+  bottom: 16px;
+  
+  overflow: hidden;
+  z-index: 1;
+  background: #0f172a;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ── Photo ── */
+.about-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position:  top;
+  display: block;
+
+  /* Default: grayscale */
+    filter: grayscale(0) brightness(1);
+  z-index: 2;
+  transition: opacity 0.55s ease;
+}
+
+
+/* ── Hover states ── */
+.about-photo-wrap:hover .about-photo {
+ 
+  /* filter: grayscale(55%) brightness(0.91);*/
+   filter: grayscale(0) brightness(1);
+}
+
+.about-photo-wrap:hover .about-photo-back {
+  
+  transform: translate(14px, 14px);
+  border-color: #14b8a6;
+}
+
+.about-photo-wrap:hover .about-photo-card {
+  transform: translate(-2px, -2px);
+  box-shadow: 0 20px 48px rgba(13, 148, 136, 0.22);
+}
+
+/* ── Respect reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .about-photo-back,
+  .about-photo-card,
+  .about-photo {
+    transition: none;
+  }
+}
+
+/* ───────────────────────────────────────────
+   RIGHT — Content
+─────────────────────────────────────────── */
+.about-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.about-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: #00c896;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.about-title {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: #e8f0fe;
+  margin: 0 0 12px;
+  line-height: 1.15;
+}
+
+.about-bar {
+  width: 52px;
+  height: 3px;
+  background: linear-gradient(90deg, #00c896, #0ea5e9);
+  border-radius: 2px;
+  margin-bottom: 24px;
+}
+
+.about-para {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: #94a3b8;
+  margin-bottom: 14px;
+}
+.about-para strong { color: #cbd5e1; font-weight: 600; }
+
+/* ── Chips ── */
+.about-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0 18px;
+}
+
+.about-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 5px 14px;
+  transition: border-color 0.25s, color 0.25s;
+}
+.about-chip:hover {
+  border-color: rgba(0, 200, 150, 0.35);
+  color: #e2e8f0;
+}
+
+/* ── Stats ── */
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.about-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  padding: 16px 10px;
+  text-align: center;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.about-stat:hover {
+  border-color: rgba(0, 200, 150, 0.3);
+  transform: translateY(-2px);
+}
+
+.about-stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #00c896;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.about-stat-label {
+  font-size: 0.72rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-photo-col {
+    align-items: center;
+  }
+  .about-photo-wrap {
+    width: 260px;
+    height: 320px;
+  }
+  .about-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .about-section { padding: 70px 0 80px; }
+  .about-container { padding: 0 20px; }
+  .about-photo-wrap {
+    width: 220px;
+    height: 280px;
+  }
+}
+
+/* ── Leadership & Activities Card ── */
+.about-leadership {
+  max-width: 1100px;
+  margin: 24px auto 0;
+  padding: 0 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 24px 28px;
+  transition: border-color 0.25s;
+}
+.about-leadership:hover {
+  border-color: rgba(0,200,150,0.25);
+}
+.about-leadership-icon {
+  font-size: 1.6rem;
+  background: rgba(0,200,150,0.1);
+  border: 1px solid rgba(0,200,150,0.2);
+  border-radius: 12px;
+  width: 52px; height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.about-leadership-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  margin: 0 0 12px;
+}
+.about-leadership-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.about-leadership-list li {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.65;
+  padding-left: 16px;
+  position: relative;
+}
+.about-leadership-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #00c896;
+  font-size: 0.7rem;
+  top: 3px;
+}
+
+@media (max-width: 768px) {
+  .about-leadership { margin: 20px 16px 0; padding: 20px; }
+}
