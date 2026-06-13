@@ -4,7 +4,7 @@ A modern and responsive portfolio website showcasing my projects, technical skil
 
 ## Live Demo
 
-🔗 Add your Vercel deployment link here
+🔗 **Portfolio:** https://manisha-portfolio-coral.vercel.app/
 
 ## Features
 
@@ -69,4 +69,4 @@ Aspiring Full Stack Developer passionate about building modern web applications 
 
 GitHub: https://github.com/ManishaBathini
 
-LinkedIn: Add your LinkedIn profile here
+LinkedIn: https://www.linkedin.com/in/manisha-bathini/
